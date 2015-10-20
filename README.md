@@ -1,5 +1,5 @@
-# travelnet
-A complete travel based recommendation engine on Python<br>
+# QuizAPI
+Quiz API for GDG Devfest VIT VELLORE<br>
 Framework used : Tornado<br>
-Aim : To make travelling easier, better, smarter.<br>
-Made with ❤ by : Ashwini  Purohit & Shubhodeep Mukherjee! :<br>
+Aim : Quizzing API for Android Application.<br>
+Made with ❤ by : Ashwini  Purohit  :<br>
