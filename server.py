@@ -27,12 +27,13 @@ introContent = """
 <body>
 <h3> Hey... Welcome to the GDG Devfest Quiz.. You will have 2 minutes to attempt the quiz. No negetive marking.. Just answer as many questions as you can..</h3><br>
 <h4> HAPPY QUIZZING</h4>
-<form action = "/quiz?key="""+quiz_key+"""">
+<form action = "/quiz">
+<input type="hidden" value="%s" name="key">
 <input type = "submit" value = "Take Quiz">
 </form>
 </body>
 </html>
-"""
+""" % (quiz_key)
 
 #Handlers :-
 class MainHandler(RequestHandler):
@@ -42,14 +43,13 @@ class MainHandler(RequestHandler):
 
 class trialHandler(RequestHandler):
 	def get(self):
-		name = self.get_argument('name','')
-		self.write('Name : '+name)
+		r = _execute('select * from questions')
+		for i in r:
+			self.write(dict(res))
 
 # Quiz Handler to generate a randomized quiz from database and serve it as a JSON for Android Application.
 
 class QuizHandler(RequestHandler):
-	@asynchronous
-	@engine
 	def get(self):
 		quizKey = self.get_argument('key', '') #Quiz Key to secure our Quiz API	
 		if(quizKey==quiz_key):
@@ -57,14 +57,15 @@ class QuizHandler(RequestHandler):
 			dbList = []
 			for i in dbResult:
 				dbList.append(dict(id=i[0],question=i[1],option1=i[2],option2=i[3],option3=i[4],option4=i[5],correctAnswer=i[6]))
-			self.write(json.dumps(dict(dbResult=dbList),indent = 4))
+			self.write(dict(dbResult=dbList))
 		else:
 			self.write("Key not matched..")
 
 #Application initialization
 application = Application([
 	(r"/", MainHandler),
-	(r"/quiz", QuizHandler)
+	(r"/quiz", QuizHandler),
+	(r"/trial", trialHandler)
 ], debug = True)
 
 #main init
