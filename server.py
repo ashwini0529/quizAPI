@@ -12,6 +12,7 @@ import json
 import requests
 import os
 import urllib2
+import random
 #import jsonify
 #custom modules
 from Database.database import _execute
@@ -50,16 +51,23 @@ class trialHandler(RequestHandler):
 # Quiz Handler to generate a randomized quiz from database and serve it as a JSON for Android Application.
 
 class QuizHandler(RequestHandler):
+	#@asynchronous
+	#@engine
 	def get(self):
+		client = AsyncHTTPClient()
+		keyError={"status" : "Key Mismatch"}
+		keyPassed = {"status" : "Key Matched"}
 		quizKey = self.get_argument('key', '') #Quiz Key to secure our Quiz API	
 		if(quizKey==quiz_key):
-			dbResult = _execute('select * from questions')
+			dbResult =_execute('select * from questions')
 			dbList = []
 			for i in dbResult:
 				dbList.append(dict(id=i[0],question=i[1],option1=i[2],option2=i[3],option3=i[4],option4=i[5],correctAnswer=i[6]))
-			self.write(dict(dbResult=dbList))
+			random.shuffle(dbList)
+			self.write(dict(dbResult=dbList,status = "Key Matched"))
 		else:
-			self.write("Key not matched..")
+			self.write(keyError)
+		self.finish()
 
 #Application initialization
 application = Application([
