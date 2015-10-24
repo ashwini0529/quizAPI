@@ -75,8 +75,8 @@ html_content = '''
         <td bgcolor="#c7d8a7" class="header">
           <table width="65" align="left" border="0" cellpadding="0" cellspacing="0">  
             <tr>
-              <td height="70" >
-                <img class="fix" src="http://www.gdgvitvellore.com/devfest/img/logo.png" width="270" height="170" border="0" alt="" />
+              <td height="50" >
+                <img class="fix" src="http://www.gdgvitvellore.com/devfest/img/logo.png" width="230" height="170" border="0" alt="" />
               </td>
             </tr>
           </table>
@@ -177,8 +177,7 @@ html_content = '''
             <tr>
               <td align="center" class="footercopy">
                 &reg; GDG-VIT Vellore, 2015<br/>
-                <a href="#" class="unsubscribe"><font color="#ffffff">Unsubscribe</font></a> 
-                <span class="hide">from this newsletter instantly</span>
+
               </td>
             </tr>
             <tr>
@@ -190,11 +189,7 @@ html_content = '''
                         <img src="http://www.gdgvitvellore.com/devfest/img/facebook.png" width="37" height="37" alt="Facebook" border="0" />
                       </a>
                     </td>
-                    <td width="37" style="text-align: center; padding: 0 10px 0 10px;">
-                      <a href="http://www.twitter.com/gdgvitvellore">
-                        <img src="http://www.gdgvitvellore.com/devfest/img/twitter.png" width="37" height="37" alt="Twitter" border="0" />
-                      </a>
-                    </td>
+                    
                   </tr>
                 </table>
               </td>
