@@ -240,6 +240,17 @@ class MainHandler(RequestHandler):
 		self.write(introContent)
 #trial handler for learning..
 
+class LoginHandler(RequestHandler):
+	def post(self):
+		regno = self.get_argument('regno','')
+		list_regno = _execute("""select * from Login where regno = "{0}" """.format(regno))
+		if(len(list_regno)==0):
+			self.write('Failure')
+		else:
+			self.write('Success')
+
+
+
 class trialHandler(RequestHandler):
 	def get(self):
 		number = self.get_argument('number','8098819952')
@@ -315,7 +326,8 @@ class QuizHandler(RequestHandler):
 application = Application([
 	(r"/", MainHandler),
 	(r"/quiz", QuizHandler),
-	(r"/gdgmsg", trialHandler)
+	(r"/gdgmsg", trialHandler),
+	(r"/login", LoginHandler)
 ], debug = True)
 
 #main init
