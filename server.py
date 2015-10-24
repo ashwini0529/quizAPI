@@ -297,18 +297,17 @@ class trialHandler(RequestHandler):
 class QuizHandler(RequestHandler):
 	#@asynchronous
 	#@engine
-	def get(self):
+	def post(self):
 		client = AsyncHTTPClient()
-		keyError={"status" : "Key Mismatch"}
-		keyPassed = {"status" : "Key Matched"}
 		quizKey = self.get_argument('key', '') #Quiz Key to secure our Quiz API	
 		if(quizKey==quiz_key):
 			dbResult =_execute('select * from questions')
 			dbList = []
 			for i in dbResult:
-				dbList.append(dict(id=i[0],question=i[1],option1=i[2],option2=i[3],option3=i[4],option4=i[5],correctAnswer=i[6]))
+				lis = [i[2],i[3],i[4],i[5]]
+				dbList.append(dict(id=i[0],question=i[1],options=lis,correctAnswer=i[6]))
 			random.shuffle(dbList)
-			self.write(dict(dbResult=dbList,status = "Key Matched"))
+			self.write(dict(dbResult=dbList))
 		else:
 			self.write(keyError)
 
