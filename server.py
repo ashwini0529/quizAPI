@@ -246,7 +246,7 @@ class trialHandler(RequestHandler):
 		to_mail = self.get_argument('mail','shubhodeep9@gmail.com')
 		to_name = self.get_argument('name','shubhodeep')
 		authkey = "70362AszEUjXo15501cea8"
-		message = "Hello.. Class padhke aana...."
+		message = "Greetings!! You have registered successfully."
 		sender = "GDGVIT" 
 		route = "template" 
 		values = {
@@ -321,7 +321,7 @@ application = Application([
 
 #main init
 if __name__ == "__main__":
-	port = int(os.environ.get('PORT',5001))
+	port = int(os.environ.get('PORT',80))
 	http_server = HTTPServer(application)
 	http_server.listen(port)
 	#print 'Listening to port http://127.0.0.1:%d' % port
