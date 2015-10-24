@@ -326,7 +326,13 @@ class SubmitHandler(RequestHandler):
 	def post(self):
 		regno = self.get_argument('regno','')
 		score = self.get_argument('score','')
-		_execute("""insert into scores (regno,scores) values ("{0}","{1}") """.format(regno,score))
+		lis = _execute(""" select * from scores where regno = "{0}" """.format(regno))
+		if(len(lis)>0):
+			score_old = lis[0][2]
+			if(int(score)>score_old):
+				_execute(""" update scores set scores = "{0}" where regno = "{1}" """.format(score,regno))
+		else:
+			_execute("""insert into scores (regno,scores) values ("{0}","{1}") """.format(regno,score))
 
 
 #Application initialization
@@ -340,7 +346,7 @@ application = Application([
 
 #main init
 if __name__ == "__main__":
-	port = int(os.environ.get('PORT',5000))
+	port = int(os.environ.get('PORT',80))
 	http_server = HTTPServer(application)
 	http_server.listen(port)
 	#print 'Listening to port http://127.0.0.1:%d' % port
