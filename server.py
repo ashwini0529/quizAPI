@@ -246,8 +246,8 @@ class trialHandler(RequestHandler):
 		to_mail = self.get_argument('mail','shubhodeep9@gmail.com')
 		to_name = self.get_argument('name','shubhodeep')
 		authkey = "70362AszEUjXo15501cea8"
-		message = "Greetings!! You have registered successfully."
-		sender = "GDGVIT" 
+		message = "Thank you for your interest. Please check your email for further details. \n Thank you, %s" % (to_name)
+		sender = "GDGVIT"
 		route = "template" 
 		values = {
 		          'authkey' : authkey,
