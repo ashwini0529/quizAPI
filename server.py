@@ -75,8 +75,8 @@ html_content = '''
         <td bgcolor="#c7d8a7" class="header">
           <table width="65" align="left" border="0" cellpadding="0" cellspacing="0">  
             <tr>
-              <td height="50" >
-                <img class="fix" src="http://www.gdgvitvellore.com/devfest/img/logo.png" width="230" height="170" border="0" alt="" />
+              <td height="40" >
+                <img class="fix" src="http://www.gdgvitvellore.com/devfest/img/logo.png" width="190" height="62" border="0" alt="" />
               </td>
             </tr>
           </table>
@@ -148,7 +148,7 @@ html_content = '''
                       <table class="buttonwrapper" bgcolor="#e05443" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                           <td class="button" height="45">
-                            <a href="http://gdgvitvellore.com/devfest">See More Details about the event</a>
+                            <a href="http://gdgvitvellore.com/devfest">More Details about the event</a>
                           </td>
                         </tr>
                       </table>
