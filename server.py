@@ -310,8 +310,7 @@ class QuizHandler(RequestHandler):
 			dbResult =_execute('select * from questions')
 			dbList = []
 			for i in dbResult:
-				lis = [i[2],i[3],i[4],i[5]]
-				dbList.append(dict(id=i[0],question=i[1],options=lis,correctAnswer=i[6]))
+				dbList.append(dict(id=i[0],question=i[1],option1=i[2],option2=i[3],option3=i[4],option4=i[5],correctAnswer=i[6]))
 			random.shuffle(dbList)
 			self.write(dict(dbResult=dbList))
 		else:
