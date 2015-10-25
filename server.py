@@ -329,6 +329,15 @@ class SubmitHandler(RequestHandler):
 		else:
 			_execute("""insert into scores (regno,scores) values ("{0}","{1}") """.format(regno,score))
 
+class leaderHandler(RequestHandler):
+	def post(self):
+		result = _execute('select * from scores order by scores desc')
+		out = []
+		rank = 1
+		for i in result:
+			out.append(dict(rank=rank,regno=i[1],scores=i[2]))
+			rank = rank+1
+		self.write(dict(leader=out))
 
 #Application initialization
 application = Application([
@@ -336,7 +345,8 @@ application = Application([
 	(r"/quiz", QuizHandler),
 	(r"/gdgmsg", trialHandler),
 	(r"/login", LoginHandler),
-	(r"/submit" , SubmitHandler)
+	(r"/submit" , SubmitHandler),
+	(r"/leader", leaderHandler)
 ], debug = True)
 
 #main init
