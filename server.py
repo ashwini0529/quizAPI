@@ -328,6 +328,7 @@ class SubmitHandler(RequestHandler):
 				_execute(""" update scores set scores = "{0}" where regno = "{1}" """.format(score,regno))
 		else:
 			_execute("""insert into scores (regno,scores) values ("{0}","{1}") """.format(regno,score))
+		self.write('Success')
 
 class leaderHandler(RequestHandler):
 	def post(self):
