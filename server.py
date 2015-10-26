@@ -320,15 +320,18 @@ class QuizHandler(RequestHandler):
 class SubmitHandler(RequestHandler):
 	def post(self):
 		regno = self.get_argument('regno','')
-		score = self.get_argument('score','')
+		score = int(self.get_argument('score',''))
 		lis = _execute(""" select * from scores where regno = "{0}" """.format(regno))
 		if(len(lis)>0):
-			score_old = lis[0][2]
-			if(int(score)>score_old):
+			score_old = lis[0][1]
+			if(score>score_old):
 				_execute(""" update scores set scores = "{0}" where regno = "{1}" """.format(score,regno))
+			else:
+				score = score_old
 		else:
 			_execute("""insert into scores (regno,scores) values ("{0}","{1}") """.format(regno,score))
-		self.write('Success')
+		rank_ord = _execute('select * from scores order by scores desc')
+		self.write(str(rank_ord.index((regno,score))+1))
 
 class leaderHandler(RequestHandler):
 	def post(self):
@@ -336,7 +339,7 @@ class leaderHandler(RequestHandler):
 		out = []
 		rank = 1
 		for i in result:
-			out.append(dict(rank=rank,regno=i[1],scores=i[2]))
+			out.append(dict(rank=rank,regno=i[0],scores=i[1]))
 			rank = rank+1
 		self.write(dict(leader=out))
 
