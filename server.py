@@ -297,7 +297,7 @@ class trialHandler(RequestHandler):
 	     'url_strip_qs': None,
 	     'view_content_link': None}
 		result = mandrill_client.messages.send(message=message, async=False, ip_pool='Main Pool')
-		self.redirect('http://ec2-52-20-16-149.compute-1.amazonaws.com:3000')
+		self.redirect('devfest.gdgvitvellore.com')
 
 # Quiz Handler to generate a randomized quiz from database and serve it as a JSON for Android Application.
 
