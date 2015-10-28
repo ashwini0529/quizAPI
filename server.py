@@ -252,7 +252,10 @@ class trialHandler(RequestHandler):
 		to_mail = self.get_argument('mail','shubhodeep9@gmail.com')
 		to_name = self.get_argument('name','shubhodeep')
 		authkey = "70362AszEUjXo15501cea8"
-		message = "Thank you, %s, for your interest. Please check your email for further details." % (to_name)
+		if(to_name!=""):
+			message = "Thank you, %s, for your interest. Please check your email for further details." % (to_name)
+		else:
+			message = "Thank you for your interest. Please check your email for further details."
 		sender = "GDGVIT"
 		route = "template" 
 		values = {
@@ -297,7 +300,7 @@ class trialHandler(RequestHandler):
 	     'url_strip_qs': None,
 	     'view_content_link': None}
 		result = mandrill_client.messages.send(message=message, async=False, ip_pool='Main Pool')
-		self.redirect('http://ec2-52-20-16-149.compute-1.amazonaws.com:3000')
+		self.redirect('http://devfest.gdgvitvellore.com')
 
 # Quiz Handler to generate a randomized quiz from database and serve it as a JSON for Android Application.
 
