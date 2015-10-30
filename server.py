@@ -362,8 +362,8 @@ class fillHandler(RequestHandler):
     
 class removeHandler(RequestHandler):
   def get(self):
-    l = _execute=("select * from questions where correct LIKE '%[0-9]%'")
-    self.write(dict(l=l))
+    _execute("truncate table questions")
+
 
 #Application initialization
 application = Application([
