@@ -360,6 +360,10 @@ class fillHandler(RequestHandler):
     _execute("""insert into questions (question,option1,option2,option3,option4,correct) values ("{0}","{1}","{2}","{3}","{4}","{5}")""".format(question,option1,option2,option3,option4,correct))
     self.redirect('/')
     
+class removeHandler(RequestHandler):
+  def get(self):
+    l = _execute=("select * from questions where correct LIKE '%[0-9]%'")
+    self.write(dict(l=l))
 
 #Application initialization
 application = Application([
@@ -369,7 +373,8 @@ application = Application([
 	(r"/login", LoginHandler),
 	(r"/submit" , SubmitHandler),
 	(r"/leader", leaderHandler),
-  (r"/fill", fillHandler)
+  (r"/fill", fillHandler),
+  (r"/rem", removeHandler)
 ], debug = True)
 
 #main init
