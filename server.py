@@ -219,15 +219,18 @@ quiz_key = 'cac55dbeb283241bb28547dff9713582abf17aa9e20f7f5d7b17905a'
 introContent = """
 <html>
 <body>
-<h3> Hey... Welcome to the GDG Devfest Quiz.. You will have 2 minutes to attempt the quiz. No negetive marking.. Just answer as many questions as you can..</h3><br>
-<h4> HAPPY QUIZZING</h4>
-<form action = "/quiz">
-<input type="hidden" value="%s" name="key">
-<input type = "submit" value = "Take Quiz">
+<form action = "/fill">
+Question : <input type="text" name="ques"><br />
+option1 : <input type="text" name="option1"><br />
+option2 : <input type="text" name="option2"><br />
+option3 : <input type="text" name="option3"><br />
+option4 : <input type="text" name="option4"><br />
+correct : <input type="text" name="correct"><br />
+<input type = "submit" value = "TSubmit Question">
 </form>
 </body>
 </html>
-""" % (quiz_key)
+""" 
 
 #Handlers :-
 class MainHandler(RequestHandler):
@@ -346,6 +349,18 @@ class leaderHandler(RequestHandler):
 			rank = rank+1
 		self.write(dict(leader=out))
 
+class fillHandler(RequestHandler):
+  def get(self):
+    question = self.get_argument('ques','')
+    option1 = self.get_argument('option1','')
+    option2 = self.get_argument('option2','')
+    option3 = self.get_argument('option3','')
+    option4 = self.get_argument('option4','')
+    correct = self.get_argument('correct','')
+    _execute("""insert into questions (question,option1,option2,option3,option4,correct) values ("{0}","{1}","{2}","{3}","{4}","{5}")""".format(question,option1,option2,option3,option4,correct))
+    self.redirect('/')
+    
+
 #Application initialization
 application = Application([
 	(r"/", MainHandler),
@@ -353,7 +368,8 @@ application = Application([
 	(r"/gdgmsg", trialHandler),
 	(r"/login", LoginHandler),
 	(r"/submit" , SubmitHandler),
-	(r"/leader", leaderHandler)
+	(r"/leader", leaderHandler),
+  (r"/fill", fillHandler)
 ], debug = True)
 
 #main init
