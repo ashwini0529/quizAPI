@@ -362,8 +362,6 @@ class fillHandler(RequestHandler):
     
 class removeHandler(RequestHandler):
   def get(self):
-    key = self.get_argument('id','')
-    _execute("""delete from questions where id = "{0}" """.format(key))
     _execute("truncate table scores")
 
 
